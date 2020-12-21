@@ -1,6 +1,10 @@
-all:
-	g++ sync-io.cpp -o sync-io.out
-	g++ uring-io.cpp -o uring-io.out -luring -Wall -O2
+CXXFLAGS = -Wall -O2 -luring
+CXX = g++
+
+all: sync-io.out uring-io.out
+
+%.out: %.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
 	rm -rf *.out
